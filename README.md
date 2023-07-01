@@ -3,10 +3,10 @@ The Vector class is a simple implementation of a dynamic array in C++. It provid
 # Usage
 To use the Vector class, follow these steps:
 - Include the Vector header file in your C++ source code:
-- - #include "Vector.h"
+ - #include "Vector.h"
 - Create an instance of the Vector class by specifying the desired capacity (optional) or using the default constructor:
-- - Vector<int> vec;  // Create an empty vector
-- - Vector<double> vec2(10);  // Create a vector with an initial capacity of 10
+ - Vector<int> vec;  // Create an empty vector
+ - Vector<double> vec2(10);  // Create a vector with an initial capacity of 10
 Use the various member functions provided by the Vector class to manipulate the vector:
 - push_back(const T&): Adds an element to the end of the vector.
 - pop_back(): Removes the last element from the vector.
