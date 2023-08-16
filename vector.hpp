@@ -12,42 +12,42 @@ class Vector
         int     m_size;
         int     m_capacity;
     public:
-		constexpr Vector(int capacity = 0) noexcept;
-		constexpr Vector(std::initializer_list<T>) noexcept;
+	constexpr Vector(int capacity = 0) noexcept;
+	constexpr Vector(std::initializer_list<T>) noexcept;
 
-		constexpr Vector(const Vector<T>&) noexcept;
-		constexpr Vector(int, T&) noexcept;
-		constexpr Vector(Vector<T>&& other) noexcept;
+	constexpr Vector(const Vector<T>&) noexcept;
+	constexpr Vector(int, T&) noexcept;
+	constexpr Vector(Vector<T>&& other) noexcept;
 
-		~Vector();
+	~Vector();
 
-		constexpr void reserve(int count);
-		constexpr void resize() noexcept;
-	    constexpr void push_back(const T&);
-	    constexpr void pop_back();
-		constexpr T& at(int) const;
-		constexpr int size() const noexcept;
-		constexpr void clear() noexcept;
-		constexpr T& front() const;
-		constexpr T& back() const;
-		constexpr bool empty() const noexcept;
-		constexpr int capacity() const noexcept;		
-		constexpr void erase(int);
-		constexpr void insert(int, const T&);
-		constexpr void insert(int, int, int);
-		constexpr void insert(Vector*, int, int);
-		constexpr T& operator[](const int) const;
-		constexpr Vector<T>& operator=(const Vector<T>&) noexcept;
-		constexpr T* begin() const noexcept;
-		constexpr T* end() const noexcept;
-		friend std::ostream& operator<<(std::ostream& os, Vector<T> vec)  
+	constexpr void reserve(int count);
+	constexpr void resize() noexcept;
+	constexpr void push_back(const T&);
+	constexpr void pop_back();
+	constexpr T& at(int) const;
+	constexpr int size() const noexcept;
+	constexpr void clear() noexcept;
+	constexpr T& front() const;
+	constexpr T& back() const;
+	constexpr bool empty() const noexcept;
+	constexpr int capacity() const noexcept;		
+	constexpr void erase(int);
+	constexpr void insert(int, const T&);
+	constexpr void insert(int, int, int);
+	constexpr void insert(Vector*, int, int);
+	constexpr T& operator[](const int) const;
+	constexpr Vector<T>& operator=(const Vector<T>&) noexcept;
+	constexpr T* begin() const noexcept;
+	constexpr T* end() const noexcept;
+	friend std::ostream& operator<<(std::ostream& os, Vector<T> vec)  
+	{
+	for(int i = 0; i < vec.size(); ++i) 
 		{
-        	for(int i = 0; i < vec.size(); ++i) 
-			{
-            	os << vec.m_arr[i] << " ";
-        	}
-        	return os;
-    	}
+	os << vec.m_arr[i] << " ";
+	}
+	return os;
+    }
 };
 
 template <typename T>
