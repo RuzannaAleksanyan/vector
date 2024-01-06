@@ -148,7 +148,8 @@ constexpr void Vector<T>::pop_back()
 	if(m_size != 0) {
         	m_size--;
     	}
-	if(m_capacity / 2 >= msize) {
+	
+	while(m_capacity / 2 >= msize) {
 		m_capacity /= 2;
 	}
 }
