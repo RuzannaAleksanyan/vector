@@ -49,4 +49,11 @@ int main()
         std::cout << *it << " ";
     }
     std::cout << std::endl;
+
+    Vector<int> vec_it = {1, 2, 3, 4, 5};
+
+    for (Vector<int>::Iterator it = vec_it.begin(); it != vec_it.end(); ++it) {
+        std::cout << *it << " ";
+    }
+    std::cout << std::endl;
 }
