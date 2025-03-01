@@ -83,10 +83,8 @@ public:
 	constexpr Iterator begin() const noexcept { return Iterator(m_arr); }
 	constexpr Iterator end() const noexcept { return Iterator(m_arr + m_size); }
 	
-	friend std::ostream &operator<<(std::ostream &os, Vector<T> vec)
-	{
-		for (int i = 0; i < vec.size(); ++i)
-		{
+	friend std::ostream &operator<<(std::ostream &os, Vector<T> vec) {
+		for (int i = 0; i < vec.size(); ++i) {
 			os << vec.m_arr[i] << " ";
 		}
 		return os;
@@ -94,14 +92,11 @@ public:
 };
 
 template <typename T>
-constexpr void Vector<T>::reserve(int count)
-{
-	if (m_capacity < count)
-	{
+constexpr void Vector<T>::reserve(int count) {
+	if (m_capacity < count) {
 		m_capacity = count;
 		T *tmp = new T[m_capacity];
-		for (int i = 0; i < m_size; ++i)
-		{
+		for (int i = 0; i < m_size; ++i) {
 			tmp[i] = m_arr[i];
 		}
 		delete[] m_arr;
@@ -111,8 +106,7 @@ constexpr void Vector<T>::reserve(int count)
 }
 
 template <typename T>
-constexpr Vector<T>::Vector(int capacity) noexcept
-{
+constexpr Vector<T>::Vector(int capacity) noexcept {
 	m_size = 0;
 	m_capacity = capacity;
 	m_arr = new T[m_capacity];
@@ -120,34 +114,28 @@ constexpr Vector<T>::Vector(int capacity) noexcept
 
 template <typename T>
 constexpr Vector<T>::Vector(const Vector<T> &other) noexcept
-	: m_size(other.m_size), m_capacity(other.m_capacity)
-{
+	: m_size(other.m_size), m_capacity(other.m_capacity) {
 	m_arr = new T[m_capacity];
-	for (int i = 0; i < m_size; ++i)
-	{
+	for (int i = 0; i < m_size; ++i) {
 		m_arr[i] = other.m_arr[i];
 	}
 }
 
 template <typename T>
 constexpr Vector<T>::Vector(int size, T &value) noexcept
-	: m_size(size), m_capacity(size)
-{
+	: m_size(size), m_capacity(size) {
 	m_arr = new T[m_capacity];
-	for (int i = 0; i < m_size; ++i)
-	{
+	for (int i = 0; i < m_size; ++i) {
 		m_arr[i] = value;
 	}
 }
 
 template <typename T>
 constexpr Vector<T>::Vector(std::initializer_list<T> init) noexcept
-	: m_size(init.size()), m_capacity(init.size())
-{
+	: m_size(init.size()), m_capacity(init.size()) {
 	m_arr = new T[m_capacity];
 	int i = 0;
-	for (const auto &value : init)
-	{
+	for (const auto &value : init) {
 		m_arr[i] = value;
 		++i;
 	}
@@ -155,26 +143,22 @@ constexpr Vector<T>::Vector(std::initializer_list<T> init) noexcept
 
 template <typename T>
 constexpr Vector<T>::Vector(Vector<T> &&other) noexcept
-	: m_arr(other.m_arr), m_size(other.m_size), m_capacity(other.m_capacity)
-{
+	: m_arr(other.m_arr), m_size(other.m_size), m_capacity(other.m_capacity) {
 	other.m_arr = nullptr;
 	other.m_size = 0;
 	other.m_capacity = 0;
 }
 
 template <typename T>
-Vector<T>::~Vector()
-{
+Vector<T>::~Vector() {
 	delete[] m_arr;
 }
 
 template <typename T>
-constexpr void Vector<T>::resize() noexcept
-{
+constexpr void Vector<T>::resize() noexcept {
 	m_capacity = (m_capacity == 0) ? 1 : m_capacity * 2;
 	T *tmp = new T[m_capacity];
-	for (int i = 0; i < m_size; ++i)
-	{
+	for (int i = 0; i < m_size; ++i) {
 		tmp[i] = m_arr[i];
 	}
 	delete[] m_arr;
@@ -183,10 +167,8 @@ constexpr void Vector<T>::resize() noexcept
 }
 
 template <typename T>
-constexpr void Vector<T>::push_back(const T &elem)
-{
-	if (m_size == m_capacity)
-	{
+constexpr void Vector<T>::push_back(const T &elem) {
+	if (m_size == m_capacity) {
 		resize();
 	}
 	m_arr[m_size] = elem;
@@ -194,87 +176,71 @@ constexpr void Vector<T>::push_back(const T &elem)
 }
 
 template <typename T>
-constexpr void Vector<T>::pop_back()
-{
-	if (m_size != 0)
-	{
+constexpr void Vector<T>::pop_back() {
+	if (m_size != 0) {
 		m_size--;
 	}
 
-	while (m_capacity / 2 >= m_size)
-	{
+	while (m_capacity / 2 >= m_size) {
 		m_capacity /= 2;
 	}
 }
 
 template <typename T>
-constexpr T &Vector<T>::at(int index) const
-{
-	if (index < m_size && index >= 0)
-	{
+constexpr T &Vector<T>::at(int index) const {
+	if (index < m_size && index >= 0) {
 		return m_arr[index];
 	}
-	else
-	{
+	else {
 		throw std::out_of_range("error");
 	}
 }
 
 template <typename T>
-constexpr int Vector<T>::size() const noexcept
-{
+constexpr int Vector<T>::size() const noexcept {
 	return m_size;
 }
 
 template <typename T>
-constexpr void Vector<T>::clear() noexcept
-{
+constexpr void Vector<T>::clear() noexcept {
 	m_size = 0;
+	m_capacity = 0;
 }
 
 template <typename T>
-constexpr T &Vector<T>::front() const
-{
+constexpr T &Vector<T>::front() const {
 	return at(0);
 }
 
 template <typename T>
-constexpr T &Vector<T>::back() const
-{
+constexpr T &Vector<T>::back() const {
 	return at(m_size - 1);
 }
 
 template <typename T>
-constexpr bool Vector<T>::empty() const noexcept
-{
+constexpr bool Vector<T>::empty() const noexcept {
 	return m_size == 0 ? true : false;
 }
 
 template <typename T>
-constexpr int Vector<T>::capacity() const noexcept
-{
+constexpr int Vector<T>::capacity() const noexcept {
 	return m_capacity;
 }
 
 template <typename T>
-constexpr void Vector<T>::erase(int index)
-{
+constexpr void Vector<T>::erase(int index) {
 	at(index);
-	for (int i = index; i < m_size; ++i)
-	{
+	for (int i = index; i < m_size; ++i) {
 		m_arr[i] = m_arr[i + 1];
 	}
 	m_size--;
 }
 
 template <typename T>
-constexpr void Vector<T>::insert(int index, const T &elem)
-{
-	if (index >= 0 && index < m_size)
-	{
+constexpr void Vector<T>::insert(int index, const T &elem) {
+	if (index >= 0 && index < m_size) {
 		m_size++;
-		for (int i = m_size; i > index; --i)
-		{
+		for (int i = m_size; i > index; --i) {
 			m_arr[i] = m_arr[i - 1];
 		}
 		m_arr[index] = elem;
@@ -282,13 +248,10 @@ constexpr void Vector<T>::insert(int index, const T &elem)
 }
 
 template <typename T>
-constexpr void Vector<T>::insert(int index, int count, int elem)
-{
-	if (index < 0 || index >= m_size)
-	{
+constexpr void Vector<T>::insert(int index, int count, int elem) {
+	if (index < 0 || index >= m_size) {
 		m_size += count;
-		for (int i = m_size - 1; i > index + 1; --i)
-		{
+		for (int i = m_size - 1; i > index + 1; --i) {
 			m_arr[i] = m_arr[i - 2];
 		}
 		m_arr[index] = elem;
@@ -297,15 +260,11 @@ constexpr void Vector<T>::insert(int index, int count, int elem)
 }
 
 template <typename T>
-constexpr void Vector<T>::insert(Vector *v, int start, int end)
-{
-	if (start >= 0 && start < m_size && end >= start)
-	{
+constexpr void Vector<T>::insert(Vector *v, int start, int end) {
+	if (start >= 0 && start < m_size && end >= start) {
 		m_size = m_size + end - start + 1;
-		for (int i = m_size - (end - start + 1); i < m_size + (end - start + 1); ++i)
-		{
-			if (start != end + 1)
-			{
+		for (int i = m_size - (end - start + 1); i < m_size + (end - start + 1); ++i) {
+			if (start != end + 1) {
 				m_arr[i] = v->arr[start];
 				start++;
 			}
@@ -314,26 +273,28 @@ constexpr void Vector<T>::insert(Vector *v, int start, int end)
 }
 
 template <typename T>
-constexpr T &Vector<T>::operator[](const int index) const
-{
+constexpr T &Vector<T>::operator[](const int index) const {
 	return at(index);
 }
 
 template <typename T>
-constexpr Vector<T> &Vector<T>::operator=(const Vector<T> &other) noexcept
-{
-	if (this == &other)
-	{
+constexpr Vector<T> &Vector<T>::operator=(const Vector<T> &other) noexcept {
+	if (this == &other)  {
 		return *this;
 	}
-	m_size = 0;
-	for (int i = 0; i < other.m_size; ++i)
-	{
-		push_back(other.m_arr[i]);
-	}
-	m_size = other.m_size;
+
+	delete[] m_arr;
+
 	m_capacity = other.m_capacity;
+	m_size = other.m_size;
+	m_arr = new T[m_capacity];
+
+	for (int i = 0; i < m_size; ++i) {
+		m_arr[i] = other.m_arr[i];
+	}
+
 	return *this;
 }
+
 
 #endif
